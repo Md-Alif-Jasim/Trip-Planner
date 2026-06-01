@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Itinerary</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <script src="script.js"></script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvmUoe7KjeLwBOjCiQ7bhlDGtPRRJ-BI&callback=initMap"
+  async defer>
+</script>
+
+  <body>
+
+    <div class="layout">
+
+      <aside class="sidebar">
+
+        <div class="sidebar-logo">
+          <h1>Itinerary</h1>
+          <p>Travel Planner</p>
+        </div>
+
+        <div class="trip-info">
+          <p class="trip-name">My Trip</p>
+          <p class="trip-dates">Add dates below</p>
+        </div>
+
+        <nav>
+          <div class="nav-item active">🚗 Car Rental</div>
+          <div class="nav-item">📅 Daily Schedule</div>
+          <div class="nav-item">🔔 Reminders</div>
+          <div class="nav-item">🍜 Food To Try</div>
+          <div class="nav-item">🕌 Places Of Worship</div>
+          <div class="nav-item">🛡 Police Stations</div>
+        </nav>
+
+      </aside>
+
+      <main class="main">
+
+        <div class="topbar">
+          <h2 class="page-title">Car Rental</h2>
+          <button class="btn">✏️ Edit Trip</button>
+        </div>
+
+        <div class="content">
+
+          <div class="panel">
+                <div class="card">
+
+                     <div class="card-header">
+                        <span class="card-icon">🚗</span>
+                        <span class="card-title">Car Pickup & Drop-off</span>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="rental-row">
+                            <div class="rental-location">
+                                 <p class="location-label">Pickup</p>
+                                 <p class="location-name">Airport Terminal 1</p>
+                                 <p class="location-time">Day 1 · 2:00 PM</p>
+                            </div>
+                            <div class="rental-arrow">→</div>
+                            <div class="rental-location right">
+                                <p class="location-label">Drop-off</p>
+                                <p class="location-name">City Hotel</p>
+                                <p class="location-time">Last Day · 10:00 AM</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+          <div class="map-panel">
+            <div id="map"></div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </body>
+</html>
