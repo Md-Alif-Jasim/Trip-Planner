@@ -6,14 +6,6 @@
     <title>Trip Itinerary</title>
     <link rel="stylesheet" href="style.css">
   </head>
-
-  <script src="script.js"></script>
-
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvmUoe7KjeLwBOjCiQ7bhlDGtPRRJ-BI&callback=initMap"
-  async defer>
-</script>
-
   <body>
 
     <div class="layout">
@@ -51,33 +43,88 @@
         <div class="content">
 
           <div class="panel">
-                <div class="card">
 
-                     <div class="card-header">
-                        <span class="card-icon">🚗</span>
-                        <span class="card-title">Car Pickup & Drop-off</span>
-                    </div>
+            <div class="card">
 
-                    <div class="card-body">
+              <div class="card-header">
+                <span class="card-icon">🚗</span>
+                <span class="card-title">Car Pickup & Drop-off</span>
+              </div>
 
-                        <div class="rental-row">
-                            <div class="rental-location">
-                                 <p class="location-label">Pickup</p>
-                                 <p class="location-name">Airport Terminal 1</p>
-                                 <p class="location-time">Day 1 · 2:00 PM</p>
-                            </div>
-                            <div class="rental-arrow">→</div>
-                            <div class="rental-location right">
-                                <p class="location-label">Drop-off</p>
-                                <p class="location-name">City Hotel</p>
-                                <p class="location-time">Last Day · 10:00 AM</p>
-                            </div>
-                        </div>
+              <div class="card-body" id="rental-card"></div>
 
-                    </div>
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddRental()">+ Add Rental</button>
+              </div>
 
-                </div>
             </div>
+
+            <div class="day-tabs" id="day-tabs">
+              <div class="day-tab active" onclick="selectDay('Day 1', this)">Day 1</div>
+              <div class="day-tab" onclick="selectDay('Day 2', this)">Day 2</div>
+              <div class="day-tab" onclick="selectDay('Day 3', this)">Day 3</div>
+            </div>
+
+            <div class="card">
+
+              <div class="card-header">
+                <span class="card-icon">📅</span>
+                <span class="card-title" id="day-title">Day 1 Stops</span>
+              </div>
+
+              <div class="card-body" id="stops-card"></div>
+
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddStop()">+ Add Stop</button>
+              </div>
+
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-icon">🔔</span>
+                <span class="card-title">Reminders</span>
+              </div>
+              <div class="card-body" id="reminders-card"></div>
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddReminder()">+ Add Reminder</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-icon">🍜</span>
+                <span class="card-title">Food To Try</span>
+              </div>
+              <div class="card-body" id="food-card"></div>
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddFood()">+ Add Food Spot</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-icon">🕌</span>
+                <span class="card-title">Places Of Worship</span>
+              </div>
+              <div class="card-body" id="worship-card"></div>
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddWorship()">+ Add Place</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-icon">🛡</span>
+                <span class="card-title">Police Stations</span>
+              </div>
+              <div class="card-body" id="police-card"></div>
+              <div class="card-footer">
+                <button class="add-btn" onclick="openAddPolice()">+ Add Station</button>
+              </div>
+            </div>
+
+          </div>
 
           <div class="map-panel">
             <div id="map"></div>
@@ -88,6 +135,168 @@
       </main>
 
     </div>
+
+    <!-- Rental Modal -->
+    <div class="modal-overlay" id="rental-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Car Rental</h3>
+
+        <div class="form-group">
+          <label class="form-label">Pickup location</label>
+          <input class="form-input" id="input-pickup" placeholder="e.g. JFK Terminal 1" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Pickup time</label>
+          <input class="form-input" id="input-pickup-time" placeholder="e.g. Day 1 · 2:00 PM" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Drop-off location</label>
+          <input class="form-input" id="input-dropoff" placeholder="e.g. City Hotel" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Drop-off time</label>
+          <input class="form-input" id="input-dropoff-time" placeholder="e.g. Last Day · 10:00 AM" />
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="saveRental()">Save</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Stop Modal -->
+    <div class="modal-overlay" id="stop-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Stop</h3>
+
+        <div class="form-group">
+          <label class="form-label">Place name</label>
+          <input class="form-input" id="input-stop-name" placeholder="e.g. Senso-ji Temple" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <input class="form-input" id="input-stop-time" placeholder="e.g. 10:30 AM" />
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn" onclick="closeStopModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="saveStop()">Save</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Reminder Modal -->
+    <div class="modal-overlay" id="reminder-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Reminder</h3>
+        <div class="form-group">
+          <label class="form-label">Reminder</label>
+          <input class="form-input" id="input-reminder-text" placeholder="e.g. Pack passport" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note</label>
+          <input class="form-input" id="input-reminder-note" placeholder="e.g. Keep in carry-on" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Priority</label>
+          <input class="form-input" id="input-reminder-priority" placeholder="High / Medium / Low" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closeReminderModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="saveReminder()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Modal -->
+    <div class="modal-overlay" id="food-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Food Spot</h3>
+        <div class="form-group">
+          <label class="form-label">Dish / restaurant</label>
+          <input class="form-input" id="input-food-name" placeholder="e.g. Ichiran Ramen" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="input-food-location" placeholder="e.g. Shinjuku, Tokyo" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note</label>
+          <input class="form-input" id="input-food-note" placeholder="e.g. Solo dining experience" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closeFoodModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="saveFood()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worship Modal -->
+    <div class="modal-overlay" id="worship-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Place of Worship</h3>
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" id="input-worship-name" placeholder="e.g. Tokyo Camii" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="input-worship-location" placeholder="e.g. Yoyogi, Shibuya" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <input class="form-input" id="input-worship-type" placeholder="e.g. Mosque, Church, Temple" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closeWorshipModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="saveWorship()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Police Modal -->
+    <div class="modal-overlay" id="police-modal">
+      <div class="modal">
+        <h3 class="modal-title">Add Police Station</h3>
+        <div class="form-group">
+          <label class="form-label">Station name</label>
+          <input class="form-input" id="input-police-name" placeholder="e.g. Shinjuku Police Station" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="input-police-location" placeholder="e.g. Shinjuku, Tokyo" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" id="input-police-phone" placeholder="e.g. +81-3-3226-0110" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closePoliceModal()">Cancel</button>
+          <button class="btn btn-accent" onclick="savePolice()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/rentals.js"></script>
+    <script src="js/stops.js"></script>
+    <script src="js/reminders.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/worship.js"></script>
+    <script src="js/police.js"></script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvmUoe7KjeLwBOjCiQ7bhlDGtPRRJ-BI&callback=initMap"
+      async defer>
+    </script>
 
   </body>
 </html>
