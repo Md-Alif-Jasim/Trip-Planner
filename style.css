@@ -345,3 +345,46 @@ nav {
 .delete-btn:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .nav-item {
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .panel {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .map-panel {
+    width: 100%;
+    height: 300px;
+  }
+
+}

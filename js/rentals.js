@@ -22,6 +22,7 @@ function renderRentals() {
 
 function deleteRental(index) {
   data.rentals.splice(index, 1)
+    saveData()
   renderRentals()
   renderMapForCurrentSection()
 }
@@ -50,11 +51,13 @@ function saveRental() {
   }
 
   data.rentals.push(newRental)
+    saveData()
 
   geocodeAddress(pickup, function(lat, lng) {
     newRental.lat = lat
     newRental.lng = lng
     renderMapForCurrentSection()
+      saveData()
   })
 
   renderRentals()

@@ -13,3 +13,16 @@ let data = {
   worship: [],
   police: []
 }
+
+function saveData() {
+  localStorage.setItem("tripData", JSON.stringify(data))
+}
+
+function loadData() {
+  const saved = localStorage.getItem("tripData")
+  if (saved) {
+    data = JSON.parse(saved)
+  }
+}
+
+loadData()
