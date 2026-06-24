@@ -50,9 +50,19 @@ function saveStop() {
     data.stops[currentDay] = []
   }
 
-  data.stops[currentDay].push({
+  const newStop = {
     name: name,
-    time: time
+    time: time,
+    lat: null,
+    lng: null
+  }
+
+  data.stops[currentDay].push(newStop)
+
+  geocodeAddress(name, function(lat, lng) {
+    newStop.lat = lat
+    newStop.lng = lng
+    renderMapForCurrentSection()
   })
 
   renderStops()

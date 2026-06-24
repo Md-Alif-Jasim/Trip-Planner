@@ -33,7 +33,21 @@ function saveFood() {
   const location = document.getElementById("input-food-location").value
   const note = document.getElementById("input-food-note").value
 
-  data.food.push({ name: name, location: location, note: note })
+  const newFood = {
+    name: name,
+    location: location,
+    note: note,
+    lat: null,
+    lng: null
+  }
+
+  data.food.push(newFood)
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    newFood.lat = lat
+    newFood.lng = lng
+    renderMapForCurrentSection()
+  })
 
   renderFood()
   closeFoodModal()

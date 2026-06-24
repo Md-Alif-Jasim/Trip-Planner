@@ -33,7 +33,21 @@ function savePolice() {
   const location = document.getElementById("input-police-location").value
   const phone = document.getElementById("input-police-phone").value
 
-  data.police.push({ name: name, location: location, phone: phone })
+  const newPolice = {
+    name: name,
+    location: location,
+    phone: phone,
+    lat: null,
+    lng: null
+  }
+
+  data.police.push(newPolice)
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    newPolice.lat = lat
+    newPolice.lng = lng
+    renderMapForCurrentSection()
+  })
 
   renderPolice()
   closePoliceModal()

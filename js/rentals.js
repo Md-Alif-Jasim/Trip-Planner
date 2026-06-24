@@ -33,11 +33,21 @@ function saveRental() {
   const dropoff = document.getElementById("input-dropoff").value
   const dropoffTime = document.getElementById("input-dropoff-time").value
 
-  data.rentals.push({
+  const newRental = {
     pickup: pickup,
     pickupTime: pickupTime,
     dropoff: dropoff,
-    dropoffTime: dropoffTime
+    dropoffTime: dropoffTime,
+    lat: null,
+    lng: null
+  }
+
+  data.rentals.push(newRental)
+
+  geocodeAddress(pickup, function(lat, lng) {
+    newRental.lat = lat
+    newRental.lng = lng
+    renderMapForCurrentSection()
   })
 
   renderRentals()

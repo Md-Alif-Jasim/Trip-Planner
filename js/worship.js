@@ -33,7 +33,21 @@ function saveWorship() {
   const location = document.getElementById("input-worship-location").value
   const type = document.getElementById("input-worship-type").value
 
-  data.worship.push({ name: name, location: location, type: type })
+  const newWorship = {
+    name: name,
+    location: location,
+    type: type,
+    lat: null,
+    lng: null
+  }
+
+  data.worship.push(newWorship)
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    newWorship.lat = lat
+    newWorship.lng = lng
+    renderMapForCurrentSection()
+  })
 
   renderWorship()
   closeWorshipModal()

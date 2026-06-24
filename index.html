@@ -23,12 +23,12 @@
         </div>
 
         <nav>
-          <div class="nav-item active">🚗 Car Rental</div>
-          <div class="nav-item">📅 Daily Schedule</div>
-          <div class="nav-item">🔔 Reminders</div>
-          <div class="nav-item">🍜 Food To Try</div>
-          <div class="nav-item">🕌 Places Of Worship</div>
-          <div class="nav-item">🛡 Police Stations</div>
+          <div class="nav-item active" data-section="rental" onclick="showSection('rental', this)">🚗 Car Rental</div>
+          <div class="nav-item" data-section="schedule" onclick="showSection('schedule', this)">📅 Daily Schedule</div>
+          <div class="nav-item" data-section="reminders" onclick="showSection('reminders', this)">🔔 Reminders</div>
+          <div class="nav-item" data-section="food" onclick="showSection('food', this)">🍜 Food To Try</div>
+          <div class="nav-item" data-section="worship" onclick="showSection('worship', this)">🕌 Places Of Worship</div>
+          <div class="nav-item" data-section="police" onclick="showSection('police', this)">🛡 Police Stations</div>
         </nav>
 
       </aside>
@@ -36,7 +36,7 @@
       <main class="main">
 
         <div class="topbar">
-          <h2 class="page-title">Car Rental</h2>
+          <h2 class="page-title" id="page-title-text">Car Rental</h2>
           <button class="btn">✏️ Edit Trip</button>
         </div>
 
@@ -44,83 +44,91 @@
 
           <div class="panel">
 
-            <div class="card">
+            <div id="section-rental">
+              <div class="card">
 
-              <div class="card-header">
-                <span class="card-icon">🚗</span>
-                <span class="card-title">Car Pickup & Drop-off</span>
-              </div>
+                <div class="card-header">
+                  <span class="card-icon">🚗</span>
+                  <span class="card-title">Car Pickup & Drop-off</span>
+                </div>
 
-              <div class="card-body" id="rental-card"></div>
+                <div class="card-body" id="rental-card"></div>
 
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddRental()">+ Add Rental</button>
-              </div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddRental()">+ Add Rental</button>
+                </div>
 
-            </div>
-
-            <div class="day-tabs" id="day-tabs">
-              <div class="day-tab active" onclick="selectDay('Day 1', this)">Day 1</div>
-              <div class="day-tab" onclick="selectDay('Day 2', this)">Day 2</div>
-              <div class="day-tab" onclick="selectDay('Day 3', this)">Day 3</div>
-            </div>
-
-            <div class="card">
-
-              <div class="card-header">
-                <span class="card-icon">📅</span>
-                <span class="card-title" id="day-title">Day 1 Stops</span>
-              </div>
-
-              <div class="card-body" id="stops-card"></div>
-
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddStop()">+ Add Stop</button>
-              </div>
-
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <span class="card-icon">🔔</span>
-                <span class="card-title">Reminders</span>
-              </div>
-              <div class="card-body" id="reminders-card"></div>
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddReminder()">+ Add Reminder</button>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-header">
-                <span class="card-icon">🍜</span>
-                <span class="card-title">Food To Try</span>
+            <div id="section-schedule" style="display:none;">
+              <div class="day-tabs" id="day-tabs">
+                <div class="day-tab active" onclick="selectDay('Day 1', this)">Day 1</div>
+                <div class="day-tab" onclick="selectDay('Day 2', this)">Day 2</div>
+                <div class="day-tab" onclick="selectDay('Day 3', this)">Day 3</div>
               </div>
-              <div class="card-body" id="food-card"></div>
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddFood()">+ Add Food Spot</button>
+
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">📅</span>
+                  <span class="card-title" id="day-title">Day 1 Stops</span>
+                </div>
+                <div class="card-body" id="stops-card"></div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddStop()">+ Add Stop</button>
+                </div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-header">
-                <span class="card-icon">🕌</span>
-                <span class="card-title">Places Of Worship</span>
-              </div>
-              <div class="card-body" id="worship-card"></div>
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddWorship()">+ Add Place</button>
+            <div id="section-reminders" style="display:none;">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">🔔</span>
+                  <span class="card-title">Reminders</span>
+                </div>
+                <div class="card-body" id="reminders-card"></div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddReminder()">+ Add Reminder</button>
+                </div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-header">
-                <span class="card-icon">🛡</span>
-                <span class="card-title">Police Stations</span>
+            <div id="section-food" style="display:none;">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">🍜</span>
+                  <span class="card-title">Food To Try</span>
+                </div>
+                <div class="card-body" id="food-card"></div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddFood()">+ Add Food Spot</button>
+                </div>
               </div>
-              <div class="card-body" id="police-card"></div>
-              <div class="card-footer">
-                <button class="add-btn" onclick="openAddPolice()">+ Add Station</button>
+            </div>
+
+            <div id="section-worship" style="display:none;">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">🕌</span>
+                  <span class="card-title">Places Of Worship</span>
+                </div>
+                <div class="card-body" id="worship-card"></div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddWorship()">+ Add Place</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="section-police" style="display:none;">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">🛡</span>
+                  <span class="card-title">Police Stations</span>
+                </div>
+                <div class="card-body" id="police-card"></div>
+                <div class="card-footer">
+                  <button class="add-btn" onclick="openAddPolice()">+ Add Station</button>
+                </div>
               </div>
             </div>
 
@@ -292,6 +300,8 @@
     <script src="js/food.js"></script>
     <script src="js/worship.js"></script>
     <script src="js/police.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/maprender.js"></script>
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvmUoe7KjeLwBOjCiQ7bhlDGtPRRJ-BI&callback=initMap"
