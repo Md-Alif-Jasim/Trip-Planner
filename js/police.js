@@ -7,7 +7,7 @@ function renderPolice() {
     return
   }
 
-  card.innerHTML = police.map(function(p) {
+  card.innerHTML = police.map(function(p, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -16,8 +16,15 @@ function renderPolice() {
           <p class="location-time">${p.location}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deletePolice(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deletePolice(index) {
+  data.police.splice(index, 1)
+  renderPolice()
+  renderMapForCurrentSection()
 }
 
 function openAddPolice() {
@@ -40,7 +47,7 @@ function savePolice() {
     lat: null,
     lng: null
   }
-
+ 
   data.police.push(newPolice)
 
   geocodeAddress(name + " " + location, function(lat, lng) {

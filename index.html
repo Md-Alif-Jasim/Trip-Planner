@@ -37,7 +37,7 @@
 
         <div class="topbar">
           <h2 class="page-title" id="page-title-text">Car Rental</h2>
-          <button class="btn">✏️ Edit Trip</button>
+          <button class="btn" onclick="openTripModal()">✏️ Edit Trip</button>
         </div>
 
         <div class="content">
@@ -292,6 +292,34 @@
       </div>
     </div>
 
+    <!-- Trip Modal -->
+<div class="modal-overlay" id="trip-modal">
+  <div class="modal">
+    <h3 class="modal-title">Edit Trip</h3>
+
+    <div class="form-group">
+      <label class="form-label">Trip name</label>
+      <input class="form-input" id="input-trip-name" placeholder="e.g. Tokyo Adventure" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Start date</label>
+      <input class="form-input" id="input-trip-start" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">End date</label>
+      <input class="form-input" id="input-trip-end" type="date" />
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" onclick="closeTripModal()">Cancel</button>
+      <button class="btn btn-accent" onclick="saveTrip()">Save</button>
+    </div>
+
+  </div>
+</div>
+
     <script src="js/data.js"></script>
     <script src="js/map.js"></script>
     <script src="js/rentals.js"></script>
@@ -302,6 +330,7 @@
     <script src="js/police.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/maprender.js"></script>
+    <script src="js/trip.js"></script>
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvmUoe7KjeLwBOjCiQ7bhlDGtPRRJ-BI&callback=initMap"

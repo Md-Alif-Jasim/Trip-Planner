@@ -22,7 +22,7 @@ function renderStops() {
     return
   }
 
-  card.innerHTML = stops.map(function(stop) {
+  card.innerHTML = stops.map(function(stop, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -30,8 +30,15 @@ function renderStops() {
           <p class="location-name">${stop.name}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deleteStop(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deleteStop(index) {
+  data.stops[currentDay].splice(index, 1)
+  renderStops()
+  renderMapForCurrentSection()
 }
 
 function openAddStop() {

@@ -7,7 +7,7 @@ function renderFood() {
     return
   }
 
-  card.innerHTML = food.map(function(f) {
+  card.innerHTML = food.map(function(f, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -16,8 +16,15 @@ function renderFood() {
           <p class="location-time">${f.note}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deleteFood(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deleteFood(index) {
+  data.food.splice(index, 1)
+  renderFood()
+  renderMapForCurrentSection()
 }
 
 function openAddFood() {

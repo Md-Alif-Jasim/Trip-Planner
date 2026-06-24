@@ -7,7 +7,7 @@ function renderWorship() {
     return
   }
 
-  card.innerHTML = worship.map(function(w) {
+  card.innerHTML = worship.map(function(w, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -16,8 +16,15 @@ function renderWorship() {
           <p class="location-time">${w.location}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deleteWorship(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deleteWorship(index) {
+  data.worship.splice(index, 1)
+  renderWorship()
+  renderMapForCurrentSection()
 }
 
 function openAddWorship() {

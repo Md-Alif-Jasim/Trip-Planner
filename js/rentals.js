@@ -1,6 +1,6 @@
 function renderRentals() {
   const card = document.getElementById("rental-card")
-  card.innerHTML = data.rentals.map(function(rental) {
+  card.innerHTML = data.rentals.map(function(rental, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -15,8 +15,15 @@ function renderRentals() {
           <p class="location-time">${rental.dropoffTime}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deleteRental(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deleteRental(index) {
+  data.rentals.splice(index, 1)
+  renderRentals()
+  renderMapForCurrentSection()
 }
 
 function openAddRental() {

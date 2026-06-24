@@ -7,7 +7,7 @@ function renderReminders() {
     return
   }
 
-  card.innerHTML = reminders.map(function(r) {
+  card.innerHTML = reminders.map(function(r, index) {
     return `
       <div class="rental-row">
         <div class="rental-location">
@@ -16,8 +16,14 @@ function renderReminders() {
           <p class="location-time">${r.note}</p>
         </div>
       </div>
+      <button class="delete-btn" onclick="deleteReminder(${index})">Delete</button>
     `
   }).join("")
+}
+
+function deleteReminder(index) {
+  data.reminders.splice(index, 1)
+  renderReminders()
 }
 
 function openAddReminder() {
