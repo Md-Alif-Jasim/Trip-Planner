@@ -12,15 +12,12 @@
 
       <aside class="sidebar">
 
-        <div class="sidebar-logo">
-          <h1>Itinerary</h1>
-          <p>Travel Planner</p>
-        </div>
-
-        <div class="trip-info">
-          <p class="trip-name">My Trip</p>
-          <p class="trip-dates">Add dates below</p>
-        </div>
+       <div class="trip-header" onclick="openTripModal()">
+  <p class="trip-name">My Trip</p>
+  <p class="trip-meta">
+    <span id="trip-dates-text">Add dates</span> · <span id="trip-location-text">Add location</span>
+  </p>
+</div>
 
         <nav>
           <div class="nav-item active" data-section="rental" onclick="showSection('rental', this)">🚗 Car Rental</div>
@@ -292,14 +289,19 @@
       </div>
     </div>
 
-    <!-- Trip Modal -->
+   <!-- Trip Modal -->
 <div class="modal-overlay" id="trip-modal">
   <div class="modal">
     <h3 class="modal-title">Edit Trip</h3>
 
     <div class="form-group">
       <label class="form-label">Trip name</label>
-      <input class="form-input" id="input-trip-name" placeholder="e.g. Tokyo Adventure" />
+      <input class="form-input" id="input-trip-name" placeholder="e.g. Grand Canyon Hike" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Location</label>
+      <input class="form-input" id="input-trip-location" placeholder="e.g. Arizona, USA" />
     </div>
 
     <div class="form-group">
