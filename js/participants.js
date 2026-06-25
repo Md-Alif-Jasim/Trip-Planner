@@ -19,10 +19,25 @@ function renderParticipants() {
           <p class="participant-name">${p.name}</p>
           <p class="participant-phone">${p.phone}</p>
         </div>
+        <button class="map-btn" onclick="sendReminder(${index})">💬 Remind</button>
         <button class="delete-btn" onclick="deleteParticipant(${index})">Delete</button>
       </div>
     `
   }).join("")
+}
+
+function sendReminder(index) {
+  const p = data.participants[index]
+  const tripName = document.querySelector(".trip-name").textContent
+  const siteUrl = window.location.href
+
+  const message = `Dear ${p.name}, this is a reminder about your upcoming trip: ${tripName}. Please visit the site to see the itinerary and what's coming up: ${siteUrl}\n\nBest, MdTheGreat`
+
+  const phone = p.phone.replace(/[^0-9+]/g, "")
+
+  const smsLink = `sms:${phone}?body=${encodeURIComponent(message)}`
+
+  window.location.href = smsLink
 }
 
 function openAddParticipant() {
