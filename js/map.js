@@ -12,7 +12,7 @@ function initMap() {
 
   geocoder = new google.maps.Geocoder()
 
-  addMarker(jfk, "JFK Terminal 1")
+  renderMapForCurrentSection()
 }
 
 function addMarker(position, title) {
@@ -22,7 +22,6 @@ function addMarker(position, title) {
     title: title
   })
   markers.push(marker)
-
   map.panTo(position)
   map.setZoom(13)
 }
