@@ -1,0 +1,6 @@
+renderRentals()
+renderStops()
+renderReminders()
+renderFood()
+renderWorship()
+renderPolice()

@@ -23,6 +23,7 @@ function renderPolice() {
 
 function deletePolice(index) {
   data.police.splice(index, 1)
+    saveData()
   renderPolice()
   renderMapForCurrentSection()
 }
@@ -49,11 +50,13 @@ function savePolice() {
   }
  
   data.police.push(newPolice)
+    saveData()
 
   geocodeAddress(name + " " + location, function(lat, lng) {
     newPolice.lat = lat
     newPolice.lng = lng
     renderMapForCurrentSection()
+      saveData()
   })
 
   renderPolice()

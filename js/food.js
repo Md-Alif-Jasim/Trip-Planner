@@ -23,6 +23,7 @@ function renderFood() {
 
 function deleteFood(index) {
   data.food.splice(index, 1)
+    saveData()
   renderFood()
   renderMapForCurrentSection()
 }
@@ -49,11 +50,13 @@ function saveFood() {
   }
 
   data.food.push(newFood)
+    saveData()
 
   geocodeAddress(name + " " + location, function(lat, lng) {
     newFood.lat = lat
     newFood.lng = lng
     renderMapForCurrentSection()
+      saveData()
   })
 
   renderFood()

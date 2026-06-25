@@ -2,26 +2,21 @@ let currentDay = "Day 1"
 
 function selectDay(day, el) {
   currentDay = day
-
   document.querySelectorAll(".day-tab").forEach(function(tab) {
     tab.classList.remove("active")
   })
   el.classList.add("active")
-
   document.getElementById("day-title").textContent = day + " Stops"
-
   renderStops()
 }
 
 function renderStops() {
   const card = document.getElementById("stops-card")
   const stops = data.stops[currentDay] || []
-
   if (stops.length === 0) {
     card.innerHTML = `<p style="font-size:13px;color:#6b6760;">No stops yet for ${currentDay}.</p>`
     return
   }
-
   card.innerHTML = stops.map(function(stop, index) {
     return `
       <div class="rental-row">
@@ -37,6 +32,7 @@ function renderStops() {
 
 function deleteStop(index) {
   data.stops[currentDay].splice(index, 1)
+  saveData()
   renderStops()
   renderMapForCurrentSection()
 }
@@ -52,29 +48,27 @@ function closeStopModal() {
 function saveStop() {
   const name = document.getElementById("input-stop-name").value
   const time = document.getElementById("input-stop-time").value
-
   if (!data.stops[currentDay]) {
     data.stops[currentDay] = []
   }
-
   const newStop = {
     name: name,
     time: time,
     lat: null,
     lng: null
   }
-
   data.stops[currentDay].push(newStop)
+  saveData()
 
   geocodeAddress(name, function(lat, lng) {
     newStop.lat = lat
     newStop.lng = lng
     renderMapForCurrentSection()
+    saveData()
   })
 
   renderStops()
   closeStopModal()
-
   document.getElementById("input-stop-name").value = ""
   document.getElementById("input-stop-time").value = ""
 }

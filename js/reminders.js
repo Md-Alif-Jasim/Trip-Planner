@@ -23,6 +23,7 @@ function renderReminders() {
 
 function deleteReminder(index) {
   data.reminders.splice(index, 1)
+    saveData()
   renderReminders()
 }
 
@@ -40,6 +41,7 @@ function saveReminder() {
   const priority = document.getElementById("input-reminder-priority").value
 
   data.reminders.push({ text: text, note: note, priority: priority })
+    saveData()
 
   renderReminders()
   closeReminderModal()

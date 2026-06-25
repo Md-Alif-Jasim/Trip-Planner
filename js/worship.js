@@ -49,11 +49,13 @@ function saveWorship() {
   }
 
   data.worship.push(newWorship)
+    saveData()
 
   geocodeAddress(name + " " + location, function(lat, lng) {
     newWorship.lat = lat
     newWorship.lng = lng
     renderMapForCurrentSection()
+      saveData()
   })
 
   renderWorship()
