@@ -5,7 +5,7 @@ function showSection(name, el) {
   })
   el.classList.add("active")
 
-  const sections = ["rental", "schedule", "reminders", "food", "worship", "police"]
+  const sections = ["rental", "schedule", "reminders", "food", "worship", "police", "participants"]
 
   sections.forEach(function(section) {
     document.getElementById("section-" + section).style.display = "none"
@@ -19,7 +19,8 @@ function showSection(name, el) {
     reminders: "Reminders",
     food: "Food To Try",
     worship: "Places Of Worship",
-    police: "Police Stations"
+    police: "Police Stations",
+    participants: "Participants"
   }
 
   document.getElementById("page-title-text").textContent = titles[name]

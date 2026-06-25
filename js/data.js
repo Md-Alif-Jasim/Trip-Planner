@@ -11,7 +11,8 @@ let data = {
   reminders: [],
   food: [],
   worship: [],
-  police: []
+  police: [],
+  participants: []
 }
 
 function saveData() {
