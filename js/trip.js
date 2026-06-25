@@ -1,4 +1,9 @@
 function openTripModal() {
+  document.getElementById("input-trip-name").value = data.trip.name
+  document.getElementById("input-trip-location").value = data.trip.location
+  document.getElementById("input-trip-start").value = data.trip.startDate
+  document.getElementById("input-trip-end").value = data.trip.endDate
+
   document.getElementById("trip-modal").classList.add("open")
 }
 
@@ -18,19 +23,29 @@ function saveTrip() {
   const start = document.getElementById("input-trip-start").value
   const end = document.getElementById("input-trip-end").value
 
-  document.querySelector(".trip-name").textContent = name || "My Trip"
-  document.getElementById("trip-location-text").textContent = location || "Add location"
+  data.trip.name = name || "My Trip"
+  data.trip.location = location
+  data.trip.startDate = start
+  data.trip.endDate = end
 
-  if (start && end) {
-    const startDate = new Date(start + "T00:00:00")
-    const endDate = new Date(end + "T00:00:00")
+  saveData()
+  renderTrip()
+  closeTripModal()
+}
+
+function renderTrip() {
+  document.querySelector(".trip-name").textContent = data.trip.name
+
+  document.getElementById("trip-location-text").textContent =
+    data.trip.location || "Add location"
+
+  if (data.trip.startDate && data.trip.endDate) {
+    const endDate = new Date(data.trip.endDate + "T00:00:00")
     const year = endDate.getFullYear()
 
     document.getElementById("trip-dates-text").textContent =
-      formatDate(start) + " – " + formatDate(end) + ", " + year
+      formatDate(data.trip.startDate) + " – " + formatDate(data.trip.endDate) + ", " + year
   } else {
     document.getElementById("trip-dates-text").textContent = "Add dates"
   }
-
-  closeTripModal()
 }

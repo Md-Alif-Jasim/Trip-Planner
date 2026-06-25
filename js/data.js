@@ -1,4 +1,10 @@
 let data = {
+  trip: {
+    name: "My Trip",
+    location: "",
+    startDate: "",
+    endDate: ""
+  },
   rentals: [
     {
       pickup: "JFK Terminal 1",
