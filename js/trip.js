@@ -29,7 +29,6 @@ function saveTrip() {
   data.trip.endDate = end
 
   saveData()
-  renderTrip()
   closeTripModal()
 }
 
