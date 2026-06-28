@@ -48,27 +48,35 @@ function closeStopModal() {
 function saveStop() {
   const name = document.getElementById("input-stop-name").value
   const time = document.getElementById("input-stop-time").value
+
   if (!data.stops[currentDay]) {
     data.stops[currentDay] = []
   }
+
   const newStop = {
     name: name,
     time: time,
     lat: null,
     lng: null
   }
+
   data.stops[currentDay].push(newStop)
+  const dayForUpdate = currentDay
+  const indexToUpdate = data.stops[currentDay].length - 1
+
   saveData()
-
-  geocodeAddress(name, function(lat, lng) {
-    newStop.lat = lat
-    newStop.lng = lng
-    renderMapForCurrentSection()
-    saveData()
-  })
-
   renderStops()
   closeStopModal()
+
   document.getElementById("input-stop-name").value = ""
   document.getElementById("input-stop-time").value = ""
+
+  geocodeAddress(name, function(lat, lng) {
+    if (data.stops[dayForUpdate] && data.stops[dayForUpdate][indexToUpdate]) {
+      data.stops[dayForUpdate][indexToUpdate].lat = lat
+      data.stops[dayForUpdate][indexToUpdate].lng = lng
+      saveData()
+      renderMapForCurrentSection()
+    }
+  })
 }

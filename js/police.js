@@ -48,17 +48,20 @@ function savePolice() {
     lat: null,
     lng: null
   }
- 
+
   data.police.push(newPolice)
-    saveData()
+  const indexToUpdate = data.police.length - 1
 
-  geocodeAddress(name + " " + location, function(lat, lng) {
-    newPolice.lat = lat
-    newPolice.lng = lng
-    renderMapForCurrentSection()
-      saveData()
-  })
-
+  saveData()
   renderPolice()
   closePoliceModal()
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    if (data.police[indexToUpdate]) {
+      data.police[indexToUpdate].lat = lat
+      data.police[indexToUpdate].lng = lng
+      saveData()
+      renderMapForCurrentSection()
+    }
+  })
 }

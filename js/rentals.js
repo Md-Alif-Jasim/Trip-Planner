@@ -22,7 +22,7 @@ function renderRentals() {
 
 function deleteRental(index) {
   data.rentals.splice(index, 1)
-    saveData()
+  saveData()
   renderRentals()
   renderMapForCurrentSection()
 }
@@ -51,16 +51,18 @@ function saveRental() {
   }
 
   data.rentals.push(newRental)
-    saveData()
+  const indexToUpdate = data.rentals.length - 1
 
-  geocodeAddress(pickup, function(lat, lng) {
-    newRental.lat = lat
-    newRental.lng = lng
-    renderMapForCurrentSection()
-      saveData()
-  })
-
+  saveData()
   renderRentals()
   closeModal()
-}
 
+  geocodeAddress(pickup, function(lat, lng) {
+    if (data.rentals[indexToUpdate]) {
+      data.rentals[indexToUpdate].lat = lat
+      data.rentals[indexToUpdate].lng = lng
+      saveData()
+      renderMapForCurrentSection()
+    }
+  })
+}

@@ -49,15 +49,18 @@ function saveWorship() {
   }
 
   data.worship.push(newWorship)
-    saveData()
+  const indexToUpdate = data.worship.length - 1
 
-  geocodeAddress(name + " " + location, function(lat, lng) {
-    newWorship.lat = lat
-    newWorship.lng = lng
-    renderMapForCurrentSection()
-      saveData()
-  })
-
+  saveData()
   renderWorship()
   closeWorshipModal()
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    if (data.worship[indexToUpdate]) {
+      data.worship[indexToUpdate].lat = lat
+      data.worship[indexToUpdate].lng = lng
+      saveData()
+      renderMapForCurrentSection()
+    }
+  })
 }

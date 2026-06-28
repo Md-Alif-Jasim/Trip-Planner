@@ -50,15 +50,18 @@ function saveFood() {
   }
 
   data.food.push(newFood)
-    saveData()
+  const indexToUpdate = data.food.length - 1
 
-  geocodeAddress(name + " " + location, function(lat, lng) {
-    newFood.lat = lat
-    newFood.lng = lng
-    renderMapForCurrentSection()
-      saveData()
-  })
-
+  saveData()
   renderFood()
   closeFoodModal()
+
+  geocodeAddress(name + " " + location, function(lat, lng) {
+    if (data.food[indexToUpdate]) {
+      data.food[indexToUpdate].lat = lat
+      data.food[indexToUpdate].lng = lng
+      saveData()
+      renderMapForCurrentSection()
+    }
+  })
 }
