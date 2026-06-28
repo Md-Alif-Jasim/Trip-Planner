@@ -21,15 +21,21 @@ let data = {
   participants: []
 }
 
+const tripDocRef = db.collection("trips").doc("main")
+
 function saveData() {
-  localStorage.setItem("tripData", JSON.stringify(data))
+  tripDocRef.set(data)
 }
 
-function loadData() {
-  const saved = localStorage.getItem("tripData")
-  if (saved) {
-    data = JSON.parse(saved)
-  }
+function listenForChanges() {
+  tripDocRef.onSnapshot(function(doc) {
+    if (doc.exists) {
+      data = doc.data()
+      renderEverything()
+    } else {
+      tripDocRef.set(data)
+    }
+  })
 }
 
-loadData()
+listenForChanges()
